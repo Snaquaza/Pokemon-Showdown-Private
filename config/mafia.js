@@ -135,8 +135,8 @@ function mInterval() {
 
 function mGameStart() {
 	if (!mGameStarting ) { return; }
-	if (mPlayers.length < 5) {
-		mRooms.rooms.mafia.add('At least 5 players are required to play. Retrying in 30 seconds.');
+	if (mPlayers.length < 4) {
+		mRooms.rooms.mafia.add('At least 4 players are required to play. Retrying in 30 seconds.');
 		setTimeout(mGameStart, 30000);
 		return;
 	}
