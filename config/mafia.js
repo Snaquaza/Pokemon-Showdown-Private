@@ -5,7 +5,7 @@
 global.mGame = exports.mGame = false;
 var mGameStarting = false;
 var mDayTime = false;
-var mNightTime = exports.mNightTime = false;
+global.mNightTime = exports.mNightTime = false;
 var mCounted = false;
 var mPlayers = new Array();
 var mRooms = require('../rooms.js');
