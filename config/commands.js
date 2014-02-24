@@ -221,6 +221,59 @@ var commands = exports.commands = {
 		if (!atLeastOne) this.sendReply("No results found.");
 	},
 
+hideauth: 'hide',
+	hide: function(target, room, user) {
+                if(!user.can('ban')){
+                        this.sendReply('/hideauth - access denied.');
+                        return false;
+                }
+                var tar = ' ';
+                if(target){
+                        target = target.trim();
+                        if(config.groupsranking.indexOf(target) > -1){
+                                if( config.groupsranking.indexOf(target) <= config.groupsranking.indexOf(user.group)){
+                                        tar = target;
+                                }else{
+                                        this.sendReply('The group symbol you have tried to use is of a higher authority than you have access to. Defaulting to \' \' instead.');
+                                }
+                        }else{
+                                this.sendReply('You have tried to use an invalid character as your auth symbol. Defaulting to \' \' instead.');
+                        }
+                }
+       
+                        user.getIdentity = function(){
+                                if(this.muted)  return '!' + this.name;
+                                if(this.locked) return '#' + this.name;
+                                return tar + this.name;
+                        };
+                        user.updateIdentity();
+ 
+                this.sendReply('You are now hiding your auth symbol as \''+tar+ '\'.');
+                this.logModCommand(user.name + ' is hiding auth symbol as \''+ tar + '\'');
+                return false;
+        },
+
+        showauth: 'show',
+        show: function(target, room, user) {
+                if (user.can('ban')) {
+                        delete user.getIdentity
+                        user.updateIdentity();
+                        this.sendReply('You have revealed your auth symbol.');
+                        return false;
+                }
+	},
+
+gr: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+ 		this.add('|raw| <b>' + user.Name +'</b> grrrrrs at'+ (target ? " " + target + "" : ""));
+	},
+
+pet: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+ 		this.add('|raw| <b>' + user.originalName +'</b> pets'+ (target ? " " + target + "" : ""));
+	},
+
+
 	/*********************************************************
 	 * Shortcuts
 	 *********************************************************/

@@ -48,7 +48,7 @@ function mEndGame() {
 	}
 }
 
-var mRemove = exports.mRemove = function(user, leave) {
+global.mRemove = exports.mRemove = function(user, leave) {
 	if (leave) {
 		mRooms.rooms.mafia.send(user + " has left the game.");
 	} else {
@@ -183,7 +183,7 @@ var commands = exports.commands = {
 			mPlayers = [];
 			mGameStarting = true;
 			room.add('A new mafia game is starting. Type /mjoin to join.');
-			mRooms.lobby.add('A new mafia game is starting. Join tervari.psim.us/mafia and type /mjoin to join.');
+			mRooms.lobby.add('A new mafia game is starting. Join the Mafia room and type /mjoin to join.');
 			/*
 			mRooms.lobby.add(mTheme.name);
 			mRooms.lobby.add(mTheme.author);
@@ -272,6 +272,7 @@ var commands = exports.commands = {
 		}
 	},
 
+/*
 	mchat: function(target, room, user, connection) {
 		if (!mGame || room !== mRooms.rooms.mafia) { return; }
 		if (user.mGroup !== 'mafia'){
@@ -284,6 +285,7 @@ var commands = exports.commands = {
 			}
 		}
 	},
+*/
 
 	mstop: function(target, room, user, connection) {
 		if (!mGame || room !== mRooms.rooms.mafia || !user.can('broadcast')) { return; }
